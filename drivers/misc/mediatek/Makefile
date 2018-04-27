@@ -2,7 +2,7 @@
 include $(srctree)/drivers/misc/mediatek/Makefile.custom
 
 ifneq ($(PROJECT_X3_SUPPORT),yes)
-obj-y	+= hallsensor/
+#obj-y	+= hallsensor/
 endif
 
 ifeq ($(CONFIG_MTK_FINGERPRINT),y)

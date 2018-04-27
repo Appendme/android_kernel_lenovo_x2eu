@@ -270,10 +270,6 @@ typedef struct system_context {
         } poc  ____cacheline_aligned; 
 } system_context;
 
-phys_addr_t sleep_aee_rec_cpu_dormant;
-phys_addr_t sleep_aee_rec_cpu_dormant_va;
-
-
 
 /*********************************
  * extern
@@ -297,6 +293,10 @@ extern void v7_flush_kern_dcache_louis(void);
 extern void v7_flush_kern_dcache_all(void);
 extern void cpu_resume(void);
 extern void trace_start_dormant(void);
+
+extern phys_addr_t sleep_aee_rec_cpu_dormant;
+extern unsigned long *sleep_aee_rec_cpu_dormant_va;
+
 
 #if 0
 __weak bool spm_is_cpu_irq_occur(int spm_core_id)

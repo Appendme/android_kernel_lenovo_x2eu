@@ -330,7 +330,7 @@ int ccci_modem_pm_resume(struct device *device)
 int ccci_modem_pm_restore_noirq(struct device *device)
 {
 	struct ccci_modem *md = (struct ccci_modem *)device->platform_data;
-	struct md_cd_ctrl *md_ctrl = (struct md_cd_ctrl *)md->private_data;
+//	struct md_cd_ctrl *md_ctrl = (struct md_cd_ctrl *)md->private_data;
 	/* IPO-H */
 	/* restore IRQ */
 /* #ifdef FEATURE_PM_IPO_H */

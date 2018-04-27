@@ -440,7 +440,9 @@ static void mtk_xhci_imod_set(u32 imod)
 }
 
 extern void usb20_pll_settings(bool host, bool forceOn);
+#ifdef CONFIG_CHARGER_BQ2589X
 extern void bq2589x_set_otg(int enable);
+#endif
 static int mtk_xhci_driver_load(void)
 {
 	int ret = 0;
@@ -463,8 +465,10 @@ static int mtk_xhci_driver_load(void)
 #ifdef CONFIG_MTK_OTG_PMIC_BOOST_5V
 	mtk_enable_pmic_otg_mode();
 #else
+	#ifdef CONFIG_CHARGER_BQ2589X
     bq2589x_set_otg(1);
 	//enableXhciAllPortPower(mtk_xhci);
+	#endif
 #endif
 #endif
 	/* USB PLL Force settings */
@@ -489,7 +493,9 @@ static void mtk_xhci_disPortPower(void)
 	#ifdef CONFIG_MTK_OTG_PMIC_BOOST_5V
 	mtk_disable_pmic_otg_mode();
 	#else
-    bq2589x_set_otg(0);
+	#ifdef CONFIG_CHARGER_BQ2589X
+	bq2589x_set_otg(0);
+	#endif
 	//disableXhciAllPortPower(mtk_xhci);
 	#endif
 #endif

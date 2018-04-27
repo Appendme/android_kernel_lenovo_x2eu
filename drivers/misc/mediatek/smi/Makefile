@@ -13,6 +13,13 @@ ccflags-y += -DSMI_92
 obj-y += smi_common_v1.o
 obj-y += smi_info_util.o
 else
+ifeq ($(CONFIG_ARCH_MT6595),y)
+ccflags-y += -I$(srctree)/drivers/misc/mediatek/video/include
+ccflags-y += -DSMI_RO
+obj-y += mmdvfs_mgr.o
+obj-y += smi_common_v2.o
+obj-y += smi_info_util.o
+else
 ifeq ($(CONFIG_ARCH_MT6795),y)
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/video/include
 ccflags-y += -DSMI_RO
@@ -36,6 +43,7 @@ obj-y += $(subst ",,$(CONFIG_MTK_PLATFORM))/
 else
 obj-y += smi_common_v3.o
 obj-y += mmdvfs_mgr_v3.o
+endif
 endif
 endif
 endif

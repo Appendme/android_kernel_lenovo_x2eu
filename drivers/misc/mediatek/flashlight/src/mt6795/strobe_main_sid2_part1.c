@@ -66,7 +66,7 @@ extern int flashDisable_LM3560_2(void);
 
 extern int setDuty_LM3560_2(int duty);
 
-extern int init_LM3560();
+extern int init_LM3560(); //TODO
 
 extern int m_duty2;
 extern int LED2CloseFlag;

@@ -232,6 +232,8 @@ extern LCM_DRIVER r69006_dsi_cmd_truly_sgm3804_lcm_drv;
 extern LCM_DRIVER nt35596_hd1080_vdo_sharp_tps65132_lcm_drv;
 extern LCM_DRIVER boe_nt36760_dsi_cmd_sgm3804_lcm_drv;
 extern LCM_DRIVER boe_nt35596s_dsi_vdo_lp3101_lcm_drv;
+extern LCM_DRIVER otm1902a_fhd_dsi_cmd_tianma_lcm_drv;
+extern LCM_DRIVER nt35595_fhd_dsi_vdo_lg_lcm_drv;
 #ifdef BUILD_LK
 extern void mdelay(unsigned long msec);
 #endif

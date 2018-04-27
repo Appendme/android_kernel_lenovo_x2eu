@@ -356,7 +356,7 @@ unsigned int bq24250_get_ichg(void)
 	kal_uint32 ret=0, val=0;
 
     ret=bq24250_read_interface(   (kal_uint8)(bq24250_CON3),
-                                    (kal_uint8)(&val),
+                                    (kal_uint8*)(&val),
                                     (kal_uint8)(CON3_ICHG_MASK),
                                     (kal_uint8)(CON3_ICHG_SHIFT)
                                     );

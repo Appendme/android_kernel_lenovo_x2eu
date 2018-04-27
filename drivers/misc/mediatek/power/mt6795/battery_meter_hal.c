@@ -12,7 +12,7 @@
 
 //modify by willcai 2014-5-29
 #if defined(SOC_BY_3RD_FG)
-#include <bq27531.h>
+#include "bq27531.h"
 #endif
 //end
 //============================================================ //

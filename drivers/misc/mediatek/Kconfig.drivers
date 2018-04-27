@@ -459,8 +459,8 @@ config MTK_EXTERNAL_LDO
 	bool "MediaTek externla LDO"
 	default n
 
-config X2_BQ27531_SUPPORT
-	bool "X2_BQ27531 support"
+config BQ27531_SUPPORT
+	bool "BQ27531 support"
 	default n
 
 config MTK_BQ24250_SUPPORT

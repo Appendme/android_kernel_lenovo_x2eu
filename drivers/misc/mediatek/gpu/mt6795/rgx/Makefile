@@ -46,7 +46,6 @@ pvrsrvkm-y += \
  services/server/env/linux/pvr_gputrace.o \
  services/server/env/linux/module.o \
  services/server/env/linux/handle_idr.o \
- services/server/env/linux/osfunc_arm64.o \
  services/server/env/linux/trace_events.o \
  services/server/env/linux/ossecure_export.o \
  services/server/env/linux/physmem_dmabuf.o \

@@ -395,9 +395,9 @@ void ccci_get_platform_version(char *ver)
 #endif
 }
 
+#ifdef FEATURE_LOW_BATTERY_SUPPORT
 static int ccci_md_low_power_notify(struct ccci_modem *md, LOW_POEWR_NOTIFY_TYPE type, int level)
 {
-#ifdef FEATURE_LOW_BATTERY_SUPPORT
 	unsigned int reserve = 0xFFFFFFFF;
 	int ret = 0;
 
@@ -430,9 +430,9 @@ static int ccci_md_low_power_notify(struct ccci_modem *md, LOW_POEWR_NOTIFY_TYPE
 	};
 
 	return ret;
-#endif
 	return 0;
 }
+#endif
 
 #ifdef FEATURE_LOW_BATTERY_SUPPORT
 static void ccci_md_low_battery_cb(LOW_BATTERY_LEVEL level)

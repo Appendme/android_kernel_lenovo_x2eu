@@ -124,7 +124,9 @@ int port_ipc_rx_ack(struct ccci_port *port)
 	return ccci_send_msg_to_md(port->modem, CCCI_IPC_RX_ACK, IPC_MSGSVC_RVC_DONE, ipc_ctrl->task_id, 1);
 }
 
+#ifdef FEATURE_MD_GET_CLIB_TIME
 static int send_new_time_to_md(int tz);
+#endif
 volatile int current_time_zone = 0;
 int port_ipc_ioctl(struct ccci_port *port, unsigned int cmd, unsigned long arg)
 {
@@ -572,6 +574,7 @@ struct ccci_port_ops ipc_kern_port_ops = {
 	.md_state_notice = &port_ipc_md_state_notice,
 };
 
+#ifdef FEATURE_MD_GET_CLIB_TIME
 int send_new_time_to_md(int tz)
 {
 	ipc_ilm_t in_ilm;
@@ -606,3 +609,4 @@ int send_new_time_to_md(int tz)
 	CCCI_INF_MSG(-1, IPC, "Update success\n");
 	return 0;
 }
+#endif

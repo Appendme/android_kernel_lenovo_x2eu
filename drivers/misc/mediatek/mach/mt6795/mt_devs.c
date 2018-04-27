@@ -37,7 +37,7 @@ static char serial_number[SERIALNO_LEN];
 extern BOOTMODE get_boot_mode(void);
 extern u32 get_devinfo_with_index(u32 index);
 extern u32 g_devinfo_data[];
-extern u32 g_devinfo_data_size;
+//extern u32 g_devinfo_data_size;
 extern void adjust_kernel_cmd_line_setting_for_console(char*, char*);
 phys_addr_t mtk_get_max_DRAM_size(void);
 #ifdef CONFIG_MTK_ECCCI_DRIVER
@@ -1213,20 +1213,20 @@ static void cmdline_filter(struct tag *cmdline_tag, char *default_cmdline)
 //}
 
 //FIX-ME early porting
-static int __init parse_tag_devinfo_data_fixup(const struct tag *tags)
-{
-    int i=0;
-    int size = tags->u.devinfo_data.devinfo_data_size;
-    for (i=0;i<size;i++){
-        g_devinfo_data[i] = tags->u.devinfo_data.devinfo_data[i];
-    }
-
-    /* print chip id for debugging purpose */
-    printk("tag_devinfo_data_rid, indx[%d]:0x%x\n", 12,g_devinfo_data[12]);
-    printk("tag_devinfo_data size:%d\n", size);
-    g_devinfo_data_size = size;
-	return 0;
-}
+//static int __init parse_tag_devinfo_data_fixup(const struct tag *tags) //TODO
+//{
+//    int i=0;
+//    int size = tags->u.devinfo_data.devinfo_data_size;
+//    for (i=0;i<size;i++){
+//        g_devinfo_data[i] = tags->u.devinfo_data.devinfo_data[i];
+//    }
+//
+//    /* print chip id for debugging purpose */
+//    printk("tag_devinfo_data_rid, indx[%d]:0x%x\n", 12,g_devinfo_data[12]);
+//    printk("tag_devinfo_data size:%d\n", size);
+//    g_devinfo_data_size = size;
+//	return 0;
+//}
 #ifdef DFO_DEBUG
 /*
  * create a dummy dfo tag for developing
@@ -1382,7 +1382,7 @@ void mt_fixup(struct tag *tags, char **cmdline, struct meminfo *mi)
         //FIX-ME early porting
         //    parse_tag_videofb_fixup(tags);
         }else if (tags->hdr.tag == ATAG_DEVINFO_DATA){
-            parse_tag_devinfo_data_fixup(tags);
+        //    parse_tag_devinfo_data_fixup(tags);
         }
         else if(tags->hdr.tag == ATAG_META_COM)
         {

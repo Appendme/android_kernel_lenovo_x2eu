@@ -74,8 +74,7 @@ static void backlight_debug_log(int level)
 	/* use buffer to reduce the backlight log */
 	current_time = sched_clock();
 
-	sprintf(buffer + strlen(buffer), "T:%lld.%lld, L:%d\n",
-		current_time/1000000000, (current_time%1000000000)/1000000, level);
+	sprintf(buffer + strlen(buffer), "L:%d\n", level);
 
 	count++;
 

@@ -11,6 +11,7 @@
 #include <linux/interrupt.h>
 #include <linux/time.h>
 #include <linux/slab.h>
+#include <linux/vmalloc.h>
 
 #include <mach/m4u.h>
 #include <mach/m4u_port.h>
@@ -112,7 +113,7 @@ static void process_dbg_opt(const char *opt)
 	if (0 == strncmp(opt, "regr:", 5)) {
 		char *p = (char *)opt + 5;
 		unsigned long addr = 0;
-		kstrtoul(p, 16, &addr);
+		kstrtoul(p, 16, (unsigned long *)&addr);
 
 		if (is_reg_addr_valid(1, addr) == 1) {
 			unsigned int regVal = DISP_REG_GET(addr);
@@ -126,8 +127,8 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 5;
 		unsigned long addr = 0;
 		unsigned int val = 0;
-		kstrtoul(p, 16, &addr);
-		kstrtoul(p + 1, 16, &val);
+		kstrtoul(p, 16, (unsigned long *)&addr);
+		kstrtoul(p + 1, 16, (unsigned long *)&val);
 
 		if (is_reg_addr_valid(1, addr) == 1) {
 			unsigned int regVal;
@@ -143,7 +144,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 8;
 		unsigned int enable = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		enable = (unsigned int)result;
 
 		if (enable)
@@ -156,7 +157,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 8;
 		unsigned int enable = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		enable = (unsigned int)result;
 
 		if (enable)
@@ -171,11 +172,11 @@ static void process_dbg_opt(const char *opt)
 		int rdma0_mode = 0;
 		int rdma1_mode = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		met_on = (int)result;
-		kstrtoul(p + 1, 10, &result);
+		kstrtoul(p + 1, 10, (unsigned long *)&result);
 		rdma0_mode = (int)result;
-		kstrtoul(p + 1, 10, &result);
+		kstrtoul(p + 1, 10, (unsigned long *)&result);
 		rdma1_mode = (int)result;
 
 		ddp_init_met_tag(met_on, rdma0_mode, rdma1_mode);
@@ -185,7 +186,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 10;
 		unsigned int level = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		level = (unsigned int)result;
 
 		if (level) {
@@ -198,7 +199,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 5;
 		unsigned int level = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		level = (unsigned int)result;
 
 		if (level) {
@@ -212,7 +213,7 @@ static void process_dbg_opt(const char *opt)
 			goto Error;
 		}
 	} else if (0 == strncmp(opt, "aal_dbg:", 8)) {
-		kstrtoul(opt + 8, 0, &result);
+		kstrtoul(opt + 8, 0, (unsigned long *)&result);
 		aal_dbg_en = (int)result;
 		sprintf(buf, "aal_dbg_en = 0x%x\n", aal_dbg_en);
 	} else if (0 == strncmp(opt, "aal_test:", 9)) {
@@ -225,7 +226,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 9;
 		unsigned int module = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		module = (unsigned int)result;
 		DDPMSG("process_dbg_opt, module=%d\n", module);
 		if (module < DISP_MODULE_NUM) {
@@ -239,7 +240,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 10;
 		unsigned int mutex_idx = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		mutex_idx = (unsigned int)result;
 		DDPMSG("process_dbg_opt, path mutex=%d\n", mutex_idx);
 		dpmgr_debug_path_status(mutex_idx);
@@ -248,7 +249,7 @@ static void process_dbg_opt(const char *opt)
 		char *p = (char *)opt + 6;
 		unsigned int enable = 0;
 
-		kstrtoul(p, 10, &result);
+		kstrtoul(p, 10, (unsigned long *)&result);
 		enable = (unsigned int)result;
 		if (enable == 1) {
 			DDPMSG("[DDP] debug=1, trigger AEE\n");

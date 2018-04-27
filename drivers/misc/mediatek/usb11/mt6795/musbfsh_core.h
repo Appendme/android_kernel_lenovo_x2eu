@@ -64,9 +64,9 @@ struct musbfsh_ep;
 #define MUSBFSH_HSDMA_CHANNELS	5 	//this should confirm to real chip ability
 
 #include <linux/musbfsh.h>
-#include "musbfsh_io.h"
-#include "musbfsh_regs.h"
-#include "musbfsh_debug.h"
+#include "../musbfsh_io.h"
+#include "../musbfsh_regs.h"
+#include "../musbfsh_debug.h"
 
 /****************************** HOST ROLE ***********************************/
 

@@ -15,7 +15,7 @@
 #include <linux/delay.h>
 #include <linux/aee.h>
 #include <linux/slab.h>
-#include <emd_ctl.h>
+#include "emd_ctl.h"
 #include <mach/mtk_ccci_helper.h>
 /******************************************************************************************
  *   Macro definition region

@@ -12,7 +12,7 @@
 #include <linux/platform_device.h>
 #include <linux/device.h>
 #include <linux/delay.h>
-#include <emd_ctl.h>
+#include "emd_ctl.h"
 /******************************************************************************************
  *   Macro definition region
  ******************************************************************************************/

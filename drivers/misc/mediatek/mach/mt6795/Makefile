@@ -76,7 +76,7 @@ ifneq ($(CONFIG_MTK_CCCI_DEVICES),y)
 ccflags-y  += -D__USING_DUMMY_CCCI_API__
 endif
 
-#obj-y += mt_static_power.o
+obj-y += mt_static_power.o
 
 obj-y += mt_ptp.o
 obj-y += mt_ptp2.o

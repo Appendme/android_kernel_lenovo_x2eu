@@ -3,3 +3,8 @@ config INPUT_CWSTM32
 	bool "CONFIG_INPUT_CWSTM32"
 	help
 	  Cywee on STM32
+
+config CUSTOM_KERNEL_SENSORHUB_CYWEE
+	bool "CUSTOM_KERNEL_SENSORHUB_CYWEE"
+	help
+	  Cywee

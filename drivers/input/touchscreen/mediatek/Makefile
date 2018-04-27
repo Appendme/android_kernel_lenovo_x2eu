@@ -10,6 +10,7 @@ obj-y   +=  tpd_default.o
 obj-y   +=  tpd_init.o
 obj-y   +=  tpd_misc.o
 obj-y   +=  tpd_setting.o
+obj-$(CONFIG_LENOVO_CTP_FEATURE)	+=  tpd_feature.o
 
 ifeq ($(CONFIG_MTK_SYNAPTICS_3320),y)
 obj-y	+=  synaptics_3320_letv/
@@ -159,4 +160,8 @@ endif
 
 ifeq ($(CONFIG_MTK_GT911TB_HOTKNOT),y)
 obj-y	+=  GT911TB_HOTKNOT/
+endif
+
+ifeq ($(CONFIG_TOUCHSCREEN_LENOVO_S3528),y)
+obj-y	+=  lenovo_S3528/
 endif

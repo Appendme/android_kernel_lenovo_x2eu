@@ -5,4 +5,5 @@ include $(srctree)/drivers/misc/mediatek/Makefile.custom
 obj-$(CONFIG_MTK_SCP_SENSORHUB) += SCP_sensorHub/
 obj-$(CONFIG_MTK_SCP_SENSORHUB) += SCP_shf/
 obj-$(CONFIG_INPUT_CWSTM32)	+= CwMcuSensor/
+obj-$(CONFIG_CUSTOM_KERNEL_SENSORHUB_CYWEE)	+= CwMcuSensorLenovo/
 obj-$(CONFIG_MTK_ICM30628)	+= icm30628/

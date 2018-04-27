@@ -3208,12 +3208,16 @@ VOID scanReportScanResultToAgps(P_ADAPTER_T prAdapter)
 {
 	P_LINK_T prBSSDescList = &prAdapter->rWifiVar.rScanInfo.rBSSDescList;
 	P_BSS_DESC_T prBssDesc = NULL;
+	P_AGPS_AP_LIST_T prAgpsApList;
+	P_AGPS_AP_INFO_T prAgpsInfo;
 	P_SCAN_INFO_T prScanInfo = &prAdapter->rWifiVar.rScanInfo;
 	UINT_8 ucIndex = 0;
-	P_AGPS_AP_LIST_T prAgpsApList = kalMemAlloc(sizeof(AGPS_AP_LIST_T), VIR_MEM_TYPE);
+
+	prAgpsApList = kalMemAlloc(sizeof(AGPS_AP_LIST_T), VIR_MEM_TYPE);
 	if (prAgpsApList == NULL)
 		return;
-	P_AGPS_AP_INFO_T prAgpsInfo = &prAgpsApList->arApInfo[0];
+	
+	prAgpsInfo = &prAgpsApList->arApInfo[0];
 
 	LINK_FOR_EACH_ENTRY(prBssDesc, prBSSDescList, rLinkEntry, BSS_DESC_T) {
 		if (prBssDesc->rUpdateTime < prScanInfo->rLastScanCompletedTime)

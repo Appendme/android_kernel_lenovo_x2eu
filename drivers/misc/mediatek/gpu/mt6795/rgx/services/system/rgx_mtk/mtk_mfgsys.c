@@ -260,7 +260,7 @@ static IMG_BOOL MTKDoGpuDVFS(IMG_UINT32 ui32NewFreqID, IMG_BOOL bIdleDevice)
 {
     PVRSRV_ERROR eResult;
     IMG_UINT32 ui32RGXDevIdx;
-    IMG_BOOL bet = IMG_FALSE;
+    //IMG_BOOL bet = IMG_FALSE;
 
     // bottom bound
     if (ui32NewFreqID > g_bottom_freq_id)
@@ -345,7 +345,6 @@ static IMG_BOOL MTKDoGpuDVFS(IMG_UINT32 ui32NewFreqID, IMG_BOOL bIdleDevice)
 /* For ged_dvfs idx commit */
 static void MTKCommitFreqIdx(unsigned long ui32NewFreqID, GED_DVFS_COMMIT_TYPE eCommitType, int* pbCommited)
 {
-    PVRSRV_DEV_POWER_STATE ePowerState;
     IMG_UINT32 ui32RGXDevIdx = MTKGetRGXDevIdx();
     PVRSRV_ERROR eResult;
     
@@ -575,11 +574,12 @@ static IMG_UINT32 MTKCalPowerIndex(IMG_VOID)
 static IMG_VOID MTKCalGpuLoading(unsigned int* pui32Loading , unsigned int* pui32Block,unsigned int* pui32Idle)
 {
     PVRSRV_DEVICE_NODE* psDevNode = MTKGetRGXDevNode();
+    PVRSRV_RGXDEV_INFO* psDevInfo = NULL;
     if (!psDevNode)
     {
         return;
     }
-    PVRSRV_RGXDEV_INFO* psDevInfo = psDevNode->pvDevice;
+    psDevInfo = psDevNode->pvDevice;
     if (psDevInfo && psDevInfo->pfnGetGpuUtilStats)
     {
         RGXFWIF_GPU_UTIL_STATS sGpuUtilStats = {0};
@@ -1047,7 +1047,6 @@ extern void (*ged_dvfs_gpu_freq_commit_fp)(unsigned long ui32NewFreqID, GED_DVFS
 
 PVRSRV_ERROR MTKMFGSystemInit(void)
 {
-    PVRSRV_ERROR error;
     
 #ifdef MTK_GPU_DVFS
     gpu_dvfs_enable = 1;
@@ -1055,7 +1054,8 @@ PVRSRV_ERROR MTKMFGSystemInit(void)
     gpu_dvfs_enable = 0;
 #endif
     
-#ifndef ENABLE_COMMON_DVFS      
+#ifndef ENABLE_COMMON_DVFS
+    PVRSRV_ERROR error;
 	error = OSLockCreate(&ghDVFSLock, LOCK_TYPE_PASSIVE);
 	if (error != PVRSRV_OK)
     {
@@ -1151,12 +1151,14 @@ PVRSRV_ERROR MTKMFGSystemInit(void)
 #endif
 
     return PVRSRV_OK;
+#ifndef ENABLE_COMMON_DVFS      
 
 ERROR:
 
     MTKMFGSystemDeInit();
 
     return PVRSRV_ERROR_INIT_FAILURE;
+#endif
 }
 
 IMG_VOID MTKMFGSystemDeInit(void)

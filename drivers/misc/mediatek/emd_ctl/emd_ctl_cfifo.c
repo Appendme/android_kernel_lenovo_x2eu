@@ -26,7 +26,7 @@
 #include <asm/dma-mapping.h>
 #include <linux/cdev.h>
 #include <linux/slab.h>
-#include <emd_ctl.h>
+#include "emd_ctl.h"
 
 #define EMD_CFIFO_NAME    "emd_cfifo_drv"
 #define EMD_CFIFO_DEV_NUM    (2)

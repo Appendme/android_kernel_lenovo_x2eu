@@ -159,7 +159,7 @@ int flashEnable_LM3560_2(void)
 {
 	
 	int err;
-	int enable_value = 0,led1_enable = 0,led2_enable = 0;
+	int enable_value = 0/*,led1_enable = 0,led2_enable = 0*/;
 
 	PK_DBG(" flashDisable_LM3560_2 S line=%d\n",__LINE__);
 
@@ -211,7 +211,7 @@ int setDuty_LM3560_2(int duty)
 {
 
 	int err;
-	int led1_duty = 0, duty_Value;
+	int led1_duty = 0/*, duty_Value*/;
 	int temp;
 	PK_DBG(" setDuty_LM3560_2 S line=%d\n",__LINE__);
 
@@ -307,7 +307,7 @@ int flashDisable_LM3560_1(void)
 int setDuty_LM3560_1(int duty)
 {
 	int err;
-	int led2_duty = 0, duty_Value= 0;
+	//int led2_duty = 0, duty_Value= 0;
 	PK_DBG(" setDuty_LM3560_1 S line=%d\n",__LINE__);
 	//mt_set_gpio_out(FLASH_GPIO_EN,GPIO_OUT_ONE);
 	if(duty<0)

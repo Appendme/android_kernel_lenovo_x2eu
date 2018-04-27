@@ -12,7 +12,7 @@
 #include <linux/uaccess.h>
 #include <linux/platform_device.h>
 #include <linux/proc_fs.h>
-#include <emd_ctl.h>
+#include "emd_ctl.h"
 #define EMD_NODE_TYPE_NUM 2
 typedef struct _emd_node
 {

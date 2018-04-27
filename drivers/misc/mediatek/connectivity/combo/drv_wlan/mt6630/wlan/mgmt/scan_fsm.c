@@ -1771,6 +1771,7 @@ BOOLEAN scnSetGSCNParam(IN P_ADAPTER_T prAdapter, IN P_PARAM_WIFI_GSCAN_CMD_PARA
 
 	DBGLOG(SCN, INFO, "scnSetGSCNParam <-----\n");
 
+	return TRUE;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -2068,6 +2069,7 @@ BOOLEAN scnFsmSetGSCNConfig(IN P_ADAPTER_T prAdapter, IN P_CMD_GSCN_SCN_COFIG_T 
 
 	scnPSCNFsm(prAdapter, PSCN_RESET, NULL, NULL, NULL, &rCmdGscnScnConfig, FALSE, FALSE, FALSE, FALSE);
 
+	return TRUE;
 }
 
 /*----------------------------------------------------------------------------*/

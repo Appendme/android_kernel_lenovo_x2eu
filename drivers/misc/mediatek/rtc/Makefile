@@ -6,23 +6,27 @@ MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
 
 #set IP folder name
 ifneq (,$(filter y,$(CONFIG_ARCH_MT6735) $(CONFIG_ARCH_MT6735M) $(CONFIG_ARCH_MT6753)))
-    MDI_IP_FOLDER:=mt6328
+	MDI_IP_FOLDER:=mt6328
 else
-    ifneq (,$(filter y,$(CONFIG_ARCH_MT6795)))
-	    MDI_IP_FOLDER:=mt6331
-    else
-        ifneq (,$(filter y,$(CONFIG_ARCH_MT6572) $(CONFIG_ARCH_MT6582) $(CONFIG_ARCH_MT6592)))
-	        MDI_IP_FOLDER:=mt6323
-        else
-            ifneq (,$(filter y,$(CONFIG_ARCH_MT6752)))
-	            MDI_IP_FOLDER:=mt6325
-	    else
-	        ifneq (,$(filter y,$(CONFIG_ARCH_MT6580)))
-	            MDI_IP_FOLDER:=mt6350
-	        endif
-            endif
-        endif
-    endif
+	ifneq (,$(filter y,$(CONFIG_ARCH_MT6795)))
+		MDI_IP_FOLDER:=mt6331
+	else
+		ifneq (,$(filter y,$(CONFIG_ARCH_MT6572) $(CONFIG_ARCH_MT6582) $(CONFIG_ARCH_MT6592)))
+			MDI_IP_FOLDER:=mt6323
+		else
+			ifneq (,$(filter y,$(CONFIG_ARCH_MT6752)))
+				MDI_IP_FOLDER:=mt6325
+			else
+				ifneq (,$(filter y,$(CONFIG_ARCH_MT6572) $(CONFIG_ARCH_MT6582) $(CONFIG_ARCH_MT6592)))
+					MDI_IP_FOLDER:=mt6323
+				else
+					ifneq (,$(filter y,$(CONFIG_ARCH_MT6595)))
+					    MDI_IP_FOLDER:=mt6331
+					endif
+				endif
+			endif
+		endif
+	endif
 endif
 
 MDP_COMMON_FOLDER:= ./
@@ -42,5 +46,5 @@ MTK_MDI_IP_SRC:= $(MDI_IP_FOLDER)/
 
 #IP dependent part
 obj-y += \
-    $(MTK_MDI_IP_SRC)
+	$(MTK_MDI_IP_SRC)
 

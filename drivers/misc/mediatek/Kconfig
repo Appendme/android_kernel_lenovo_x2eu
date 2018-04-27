@@ -17,6 +17,11 @@ config MTK_INTERNAL
 	  Identify if codebase is built with MTK internal debug
 	  (Don't modify this feature option setting.)
 
+config MTK_LEGACY
+	bool "MTK_LEGACY"
+	help
+	  For use MTK_LEGACY code
+
 source "drivers/misc/mediatek/cirq/Kconfig"
 
 source "drivers/misc/mediatek/systracker/Kconfig"
@@ -179,6 +184,12 @@ config CUSTOM_KERNEL_FLASHLIGHT
 	help
 	  Kernel space cameara flashlight driver. You can use this driver
 	  choose cameara flashlight type.
+
+config CUSTOM_KERNEL_EXTMD
+	string "CUSTOM_KERNEL_EXTMD"
+	default ""
+	help
+	  Config external md type.
 
 config MTK_FORCE_CLUSTER1
 	bool "MTK_FORCE_CLUSTER1"

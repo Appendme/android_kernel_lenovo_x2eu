@@ -45,13 +45,13 @@
 
 static unsigned int bq27531_fw_update_status = 0;
 
-static unsigned short bq27531_cmd_addr[bq27531_REG_NUM] =
+/*static unsigned short bq27531_cmd_addr[bq27531_REG_NUM] =
 {
 	0x00, 0x02, 0x04, 0x06, 0x08, 0x0a, 0x0c, 0x0e,
 	0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e,
 	0x20, 0x22, 0x24, 0x26, 0x28, 0x2a, 0x2c, 0x2e,
 	0x30, 0x32, 0x34, 0x6e, 0x70, 0x72
-};
+};*/
 
 static struct i2c_client *new_client = NULL;
 static const struct i2c_device_id bq27531_i2c_id[] = {{"bq27531",0},{}};
@@ -148,7 +148,7 @@ int bq27531_write_byte(kal_uint8 cmd, kal_uint8 writeData)
 int bq27531_read_2byte(kal_uint8 cmd, kal_uint16 *returnData)
 {
     char     cmd_buf[2]={0x00};
-    char     readData = 0;
+    //char     readData = 0;
     int      ret=0;
 
     mutex_lock(&bq27531_i2c_access);
@@ -208,7 +208,7 @@ int bq27531_write_2byte(kal_uint8 cmd, kal_uint16 writeData)
 
 int bq27531_read_bytes(kal_uint8 slave_addr, kal_uint8 *returnData, kal_uint32 len)
 {
-	kal_uint8* buf;
+	//kal_uint8* buf;
 	int ret=0;
 
 	mutex_lock(&bq27531_i2c_access);
@@ -434,6 +434,37 @@ int bq27531_write_ctrl(kal_uint16 cmd, kal_uint16 writeData)
     return 1;
 }
 
+int bq27531_write_ctrl_cmd(kal_uint16 cmd)
+{
+	char write_data[6] = {0};
+	int ret=0;
+
+	mutex_lock(&bq27531_i2c_access);
+	
+	write_data[0] = (char) 0x00;
+
+	write_data[1] = (char) cmd&0xff;
+	write_data[2] = (char) (cmd>>8)&0xff;
+
+	//for(ret=0;ret<5;ret++)
+	//  printk("ww_debug data[%d]=0x%x\n", ret, write_data[ret]);
+	
+	new_client->ext_flag=((new_client->ext_flag ) & I2C_MASK_FLAG ) | I2C_DIRECTION_FLAG;
+	new_client->timing = 100;
+	
+	ret = i2c_master_send(new_client, write_data, 3);
+	if (ret < 0) 
+	{
+		new_client->ext_flag=0;
+		mutex_unlock(&bq27531_i2c_access);
+		return 0;
+	}
+
+	new_client->ext_flag=0;
+	mutex_unlock(&bq27531_i2c_access);
+	return 1;
+}
+
 /**********************************************************
   *
   *   [Read / Write Function]
@@ -615,6 +646,15 @@ unsigned int bq27531_get_ctrl_dfver(void)
 }
 
 //other command
+short bq27531_set_reset(void)
+{
+	short ret = 0;
+
+	ret = bq27531_write_ctrl_cmd(bq27531_CTRL_RESET);
+	printk("bq27531_set_reset: ret=%d  \n",ret);
+
+	return ret;
+}
 void bq27531_set_temperature(kal_int32 temp)
 {
 	//unsigned short ret = 0;

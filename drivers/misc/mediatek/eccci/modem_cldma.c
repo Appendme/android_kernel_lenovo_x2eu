@@ -2234,13 +2234,13 @@ static int md_cd_start(struct ccci_modem *md)
 /* only run this in thread context, as we use flush_work in it */
 static void md_cldma_clear(struct ccci_modem *md)
 {
-	struct md_cd_ctrl *md_ctrl = (struct md_cd_ctrl *)md->private_data;
-	int i;
-	unsigned int ret;
 	unsigned long flags;
-	int retry = 100;
-
 #ifdef ENABLE_CLDMA_AP_SIDE	/* touch MD CLDMA to flush all data from MD to AP */
+	struct md_cd_ctrl *md_ctrl = (struct md_cd_ctrl *)md->private_data;
+	unsigned int ret;
+	int retry = 100;
+	int i;
+
 	ret = cldma_read32(md_ctrl->cldma_md_pdn_base, CLDMA_AP_UL_STATUS);
 	for (i = 0; (CLDMA_BM_ALL_QUEUE & ret) && i < QUEUE_LEN(md_ctrl->rxq); i++) {
 		if ((CLDMA_BM_ALL_QUEUE & ret) & (1 << i)) {

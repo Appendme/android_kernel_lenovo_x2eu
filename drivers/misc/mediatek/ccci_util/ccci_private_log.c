@@ -11,6 +11,7 @@
 #include <linux/types.h>
 #include <linux/ktime.h>
 #include <linux/delay.h>
+#include <linux/vmalloc.h>
 #include <mach/mt_ccci_common.h>
 
 #include "ccci_util_log.h"

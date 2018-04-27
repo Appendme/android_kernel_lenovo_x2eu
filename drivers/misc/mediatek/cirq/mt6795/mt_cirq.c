@@ -548,7 +548,7 @@ void mt_cirq_dump_reg(void)
 	int pol, sens, mask;
 	int irq_iter;
 
-	pr_dbg("IRQ:\tPOL\tSENS\tMASK\n");
+	pr_debug("IRQ:\tPOL\tSENS\tMASK\n");
 	for (cirq_num = 0; cirq_num < CIRQ_IRQ_NUM; cirq_num++) {
 		pol = mt_cirq_get_pol(cirq_num);
 		sens = mt_cirq_get_sens(cirq_num);
@@ -560,11 +560,11 @@ void mt_cirq_dump_reg(void)
 			for (irq_iter = 0; __check_irq_type[irq_iter].num >= 0; irq_iter++) {
 				if (__check_irq_type[irq_iter].num == CIRQ_TO_IRQ_NUM(cirq_num)) {
 					if (__check_irq_type[irq_iter].sensitivity != sens) {
-						pr_dbg("[CIRQ] Error sens in irq:%d\n",
+						pr_debug("[CIRQ] Error sens in irq:%d\n",
 							__check_irq_type[irq_iter].num);
 					}
 					if (__check_irq_type[irq_iter].polarity != pol) {
-						pr_dbg("[CIRQ] Error polarity in irq:%d\n",
+						pr_debug("[CIRQ] Error polarity in irq:%d\n",
 							__check_irq_type[irq_iter].num);
 					}
 					break;
@@ -573,7 +573,7 @@ void mt_cirq_dump_reg(void)
 		}
 #endif
 
-		pr_dbg("IRQ:%d\t%d\t%d\t%d\n", CIRQ_TO_IRQ_NUM(cirq_num), pol, sens, mask);
+		pr_debug("IRQ:%d\t%d\t%d\t%d\n", CIRQ_TO_IRQ_NUM(cirq_num), pol, sens, mask);
 
 	}
 }
@@ -586,26 +586,26 @@ int mt_cirq_test(void)
 	/*test polarity*/
 	mt_cirq_set_pol(cirq_num, MT_CIRQ_POL_NEG);
 	if (mt_cirq_get_pol(cirq_num) != MT_CIRQ_POL_NEG)
-		pr_dbg("mt_cirq_set_pol test failed!!\n");
+		pr_debug("mt_cirq_set_pol test failed!!\n");
 	mt_cirq_set_pol(cirq_num, MT_CIRQ_POL_POS);
 	if (mt_cirq_get_pol(cirq_num) != MT_CIRQ_POL_POS)
-		pr_dbg("mt_cirq_set_pol test failed!!\n");
+		pr_debug("mt_cirq_set_pol test failed!!\n");
 
 	/*test sensitivity*/
 	mt_cirq_set_sens(cirq_num, MT_EDGE_SENSITIVE);
 	if (mt_cirq_get_sens(cirq_num) != MT_EDGE_SENSITIVE)
-		pr_dbg("mt_cirq_set_sens test failed!!\n");
+		pr_debug("mt_cirq_set_sens test failed!!\n");
 	mt_cirq_set_sens(cirq_num, MT_LEVEL_SENSITIVE);
 	if (mt_cirq_get_sens(cirq_num) != MT_LEVEL_SENSITIVE)
-		pr_dbg("mt_cirq_set_sens test failed!!\n");
+		pr_debug("mt_cirq_set_sens test failed!!\n");
 
 	/*test mask*/
 	mt_cirq_mask(cirq_num);
 	if (mt_cirq_get_mask(cirq_num) != 1)
-		pr_dbg("mt_cirq_mask test failed!!\n");
+		pr_debug("mt_cirq_mask test failed!!\n");
 	mt_cirq_unmask(cirq_num);
 	if (mt_cirq_get_mask(cirq_num) != 0)
-		pr_dbg("mt_cirq_unmask test failed!!\n");
+		pr_debug("mt_cirq_unmask test failed!!\n");
 
 	mt_cirq_clone_gic();
 	mt_cirq_dump_reg();
@@ -648,7 +648,7 @@ static int __init mt_cirq_init(void)
 	int_pol_ctl0 = of_iomap(node, 2);
 	WARN(!int_pol_ctl0, "unable to map gic polarity registers\n");
 
-	pr_dbg(CIRQ_LOG_LEVEL "CIRQ init...\n");
+	pr_debug(CIRQ_LOG_LEVEL "CIRQ init...\n");
 
 #ifdef CONFIG_OF
 	node = of_find_compatible_node(NULL, NULL, "mediatek,SYS_CIRQ");
@@ -656,7 +656,7 @@ static int __init mt_cirq_init(void)
 		pr_err("find SYS_CIRQ node failed!!!\n");
 	else {
 		SYS_CIRQ_BASE = of_iomap(node, 0);
-		pr_dbg("[SYS_CIRQ] SYS_CIRQ_BASE = 0x%p\n", SYS_CIRQ_BASE);
+		pr_debug("[SYS_CIRQ] SYS_CIRQ_BASE = 0x%p\n", SYS_CIRQ_BASE);
 		WARN(!SYS_CIRQ_BASE, "unable to map SYS_CIRQ base registers!!!\n");
 
 		if (of_property_read_u32(node, "cirq_num", &CIRQ_IRQ_NUM))
@@ -671,7 +671,7 @@ static int __init mt_cirq_init(void)
 		}
 	}
 	sys_cirq_num = irq_of_parse_and_map(node, 0);
-	pr_dbg("[SYS_CIRQ] sys_cirq_num = %d\n", sys_cirq_num);
+	pr_debug("[SYS_CIRQ] sys_cirq_num = %d\n", sys_cirq_num);
 #endif
 
 #ifdef CONFIG_OF
@@ -682,11 +682,11 @@ static int __init mt_cirq_init(void)
 	if (ret > 0)
 		pr_err("CIRQ IRQ LINE NOT AVAILABLE!!\n");
 	else
-		pr_dbg("CIRQ handler init success.\n");
+		pr_debug("CIRQ handler init success.\n");
 
 	ret = driver_register(&mt_cirq_drv.driver);
 	if (ret == 0)
-		pr_dbg("CIRQ init done...\n");
+		pr_debug("CIRQ init done...\n");
 
 #ifdef LDVT
 	ret = driver_create_file(&mt_cirq_drv.driver, &driver_attr_cirq_dvt);

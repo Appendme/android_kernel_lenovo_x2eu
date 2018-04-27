@@ -51,7 +51,7 @@ static void status_msg_handler(struct ccci_port *port, struct ccci_request *req)
 #define EX_TIMER_MD_EX_REC_OK 30
 #define EX_TIMER_MD_HANG 5
 
-#if defined(FEATURE_GET_MD_GPIO_NUM)
+#if defined(FEATURE_GET_MD_GPIO_NUM) && !defined(CONFIG_MTK_LEGACY)
 static struct gpio_item gpio_mapping_table[] = {
 	{"GPIO_FDD_Band_Support_Detection_1", "GPIO_FDD_BAND_SUPPORT_DETECT_1ST_PIN",},
 	{"GPIO_FDD_Band_Support_Detection_2", "GPIO_FDD_BAND_SUPPORT_DETECT_2ND_PIN",},
@@ -223,7 +223,9 @@ static int prepare_runtime_data(struct ccci_modem *md, struct ccci_request *req)
 	struct md_query_ap_feature md_feature_ap;
 	struct ccci_runtime_boot_info boot_info;
 	unsigned int random_seed = 0;
+#ifdef FEATURE_MD_GET_CLIB_TIME
 	struct timeval t;
+#endif
 
 	CCCI_NOTICE_MSG(md->index, KERN, "prepare_runtime_data  AP total %u features\n", RUNTIME_FEATURE_ID_MAX);
 

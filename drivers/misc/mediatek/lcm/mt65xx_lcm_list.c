@@ -22,6 +22,14 @@
 
 LCM_DRIVER *lcm_driver_list[] = {
 
+#if defined(NT35595_FHD_DSI_VDO_LG)
+	&nt35595_fhd_dsi_vdo_lg_lcm_drv,
+#endif
+
+#if defined(OTM1902A_FHD_DSI_CMD_TIANMA)
+    &otm1902a_fhd_dsi_cmd_tianma_lcm_drv,
+#endif
+
 #if defined(BOE_NT36760_DSI_CMD_SGM3804)
 	&boe_nt36760_dsi_cmd_sgm3804_lcm_drv,
 #endif

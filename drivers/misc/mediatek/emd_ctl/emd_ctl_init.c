@@ -2,7 +2,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <mach/irqs.h>
-#include <emd_ctl.h>
+#include "emd_ctl.h"
 
 void update_ccci_port_ver(unsigned int new_ver);
 static int __init emd_ctl_init(void)

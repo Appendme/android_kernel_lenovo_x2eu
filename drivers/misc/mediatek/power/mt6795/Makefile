@@ -6,7 +6,7 @@ ifeq ($(MTK_PMIC_DVT_SUPPORT),y)
     obj-$(CONFIG_MTK_PMIC)      += pmic_dvt.o
 endif
 
-ifeq ($(CONFIG_X2_BQ27531_SUPPORT),y)
+ifeq ($(CONFIG_BQ27531_SUPPORT),y)
     obj-$(CONFIG_MTK_SMART_BATTERY) += bq27531.o bq27531_firmware.o
 endif
 obj-$(CONFIG_MTK_SMART_BATTERY) += battery_meter_hal.o 
