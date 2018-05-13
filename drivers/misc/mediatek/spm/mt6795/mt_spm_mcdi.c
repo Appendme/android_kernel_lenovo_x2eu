@@ -31,7 +31,7 @@
 #define SPM_BYPASS_SYSPWREQ     0
 #endif
 
-#define SPM_AEE_RR_REC 1
+#define SPM_AEE_RR_REC 0
 
 #define WAKE_SRC_FOR_MCDI                     \
     ( WAKE_SRC_SYSPWREQ | WAKE_SRC_CPU_IRQ )
@@ -878,8 +878,13 @@ int spm_mcdi_init(void)
     int mcdi_err = 0;
 #if SPM_AEE_RR_REC
     p_is_mcdi_wfi = aee_rr_rec_mcdi_wfi();
-
-    *p_is_mcdi_wfi = 0;
+    if(p_is_mcdi_wfi)
+    	*p_is_mcdi_wfi = 0;
+    else
+    {
+    	pr_err("[SPM-MCDI] spm_mcdi_init error, p_is_mcdi_wfi = NULL");
+    	return -1;
+    }
 #endif
 
     mcdi_err = platform_driver_register(&mtk_spm_mcdi_driver);
