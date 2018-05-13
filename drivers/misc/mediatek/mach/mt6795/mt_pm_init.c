@@ -759,7 +759,7 @@ static int __init mt_power_management_init(void)
    	mt_dcm_init(); // dynamic clock management init
 
     pm_init_dir = proc_mkdir("pm_init", NULL);
-    pm_init_dir = proc_mkdir("pm_init", NULL);
+
     if (!pm_init_dir)
     {
         pr_err("[%s]: mkdir /proc/pm_init failed\n", __FUNCTION__);
