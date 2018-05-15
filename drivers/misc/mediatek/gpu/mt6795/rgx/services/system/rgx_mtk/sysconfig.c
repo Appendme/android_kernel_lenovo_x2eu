@@ -225,7 +225,7 @@ err_out:
 		}
 	}
 #else
-dump_stack();
+	//dump_stack();
 	gsDevices[0].sRegsCpuPBase.uiAddr   = SYS_MTK_RGX_REGS_SYS_PHYS_BASE;
 	gsDevices[0].ui32RegsSize           = SYS_MTK_RGX_REGS_SIZE;
 	gsDevices[0].ui32IRQ                = SYS_MTK_RGX_IRQ;
