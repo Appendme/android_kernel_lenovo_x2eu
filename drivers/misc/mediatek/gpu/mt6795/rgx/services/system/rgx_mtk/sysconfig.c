@@ -190,7 +190,7 @@ PVRSRV_ERROR SysCreateConfigData(PVRSRV_SYSTEM_CONFIG **ppsSysConfig, void *hDev
 	{
 		struct resource *irq_res;
 		struct resource *reg_res;
-dump_stack();
+		//dump_stack();
 		irq_res = platform_get_resource(gpsPVRLDMDev, IORESOURCE_IRQ, 0);
 
 		if (irq_res)
