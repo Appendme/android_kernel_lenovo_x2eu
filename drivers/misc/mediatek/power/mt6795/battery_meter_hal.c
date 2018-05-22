@@ -569,7 +569,6 @@ static kal_int32 fgauge_hw_reset(void *data)
 #if defined(SOC_BY_3RD_FG)
 static kal_int32 fgauge_get_soc(void *data)
 {
-
     *(kal_int32*)(data) = bq27531_get_percengage_of_fullchargercapacity();
 
     return STATUS_OK;
@@ -595,8 +594,6 @@ static kal_int32 read_adc_v_bat_sense(void *data)
 
     return STATUS_OK;
 }
-
-
 
 static kal_int32 read_adc_v_i_sense(void *data)
 {
@@ -681,16 +678,22 @@ static kal_int32 (* const bm_func[BATTERY_METER_CMD_NUMBER])(void *data)=
     ,fgauge_read_current		//hw fuel gague used only
     ,fgauge_read_current_sign	//hw fuel gague used only
     ,fgauge_read_columb			//hw fuel gague used only
-	, fgauge_read_columb_accurate
+	,fgauge_read_columb_accurate
 
     ,fgauge_hw_reset			//hw fuel gague used only
+//modify by willcai 2014-5-29
+#if defined(SOC_BY_3RD_FG)
+	,fgauge_get_soc			    //3rd fuel gague used only
+	,fgauge_set_temp			//3rd fuel gague used only
+#endif    
+/*End,Lenovo-sw chailu1 modify 2014-4-23, support TI's FG fuction*/   
     ,read_adc_v_bat_sense
     ,read_adc_v_i_sense
     ,read_adc_v_bat_temp
     ,read_adc_v_charger
 
     ,read_hw_ocv
-	, read_battery_plug_out_status
+	,read_battery_plug_out_status
     ,dump_register_fgadc		//hw fuel gague used only
 };
 

@@ -636,8 +636,7 @@ int force_get_tbat(kal_bool update)
 			fg_r_value = get_r_fg_value();
 
 			ret = battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT, &fg_current_temp);
-			ret =
-			    battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT_SIGN, &fg_current_state);
+			ret = battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT_SIGN, &fg_current_state);
 			fg_current_temp = fg_current_temp / 10;
 
 			if (fg_current_state == KAL_TRUE) {
@@ -2249,7 +2248,7 @@ void fgauge_algo_run_init(void)
 	gFG_voltage = battery_meter_get_battery_voltage(KAL_TRUE);
 	gFG_voltage_init = gFG_voltage;	
 	ret = battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT, &gFG_current);
-	ret=battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT_SIGN, &gFG_Is_Charging);
+	ret = battery_meter_ctrl(BATTERY_METER_CMD_GET_HW_FG_CURRENT_SIGN, &gFG_Is_Charging);
 
 	gFG_voltage = gFG_voltage + fgauge_compensate_battery_voltage_recursion(gFG_voltage, 5);	/* mV */
 	gFG_voltage = gFG_voltage + OCV_BOARD_COMPESATE;
@@ -2781,12 +2780,8 @@ kal_int32 battery_meter_get_charger_voltage(void)
 #if defined(SOC_BY_3RD_FG) 
 kal_int32 battery_meter_set_3rd_fg_temp(kal_int32 val)
 {
-    int ret=0;
-    
     battery_meter_ctrl(BATTERY_METER_CMD_SET_FG_TEMP, val);
-
-    return ret;
-
+    return 0;
 }
 #endif
 //end
@@ -4066,8 +4061,8 @@ static struct platform_driver battery_meter_driver = {
 	.suspend = battery_meter_suspend,
 	.resume = battery_meter_resume,
 	.driver = {
-		   .name = "battery_meter",
-		   },
+		.name = "battery_meter",
+	},
 };
 
 static int battery_meter_dts_probe(struct platform_device *dev)
@@ -4096,11 +4091,11 @@ static struct platform_driver battery_meter_dts_driver = {
 	.suspend = NULL,
 	.resume = NULL,
 	.driver = {
-		   .name = "battery_meter_dts",
-        #ifdef CONFIG_OF 
-        .of_match_table = mt_bat_meter_of_match,    
-        #endif
-		   },
+		.name = "battery_meter_dts",
+#ifdef CONFIG_OF 
+		.of_match_table = mt_bat_meter_of_match,    
+#endif
+	},
 };
 
 static int __init battery_meter_init(void)

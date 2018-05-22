@@ -2448,7 +2448,7 @@ static void mt_battery_notify_VBat_check(void)
 		/* if(BMT_status.bat_vol > 3800) //test */
 	{
 		g_BatteryNotifyCode |= 0x0008;
-		battery_log(BAT_LOG_CRTI, "[BATTERY] bat_vlot(%ld) > 4350mV\n",
+		battery_log(BAT_LOG_CRTI, "[BATTERY] bat_vlot(%d) > 4350mV\n",
 				    BMT_status.bat_vol);
 	} else {
 		g_BatteryNotifyCode &= ~(0x0008);

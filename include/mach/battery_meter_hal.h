@@ -34,8 +34,8 @@ typedef enum {
 	BATTERY_METER_CMD_HW_RESET,	/* FGADC_Reset_SW_Parameter */
 /*add by heliang for 3rd_fg,begin */	
 #if defined(SOC_BY_3RD_FG)
-        BATTERY_METER_CMD_GET_FG_SOC,                 //3rd fuel gague used only
-        BATTERY_METER_CMD_SET_FG_TEMP,                 //3rd fuel gague used only    
+	BATTERY_METER_CMD_GET_FG_SOC,				//3rd fuel gague used only
+	BATTERY_METER_CMD_SET_FG_TEMP,				//3rd fuel gague used only    
 #endif    
  /*add by heliang for 3rd_fg,end*/ 
 
