@@ -117,6 +117,7 @@ static DEFINE_MUTEX(pmic_lock_mutex);
 
 #define PMICTAG                "[PMIC] "
 #define PMICLOG(fmt, arg...)   pr_debug(PMICTAG fmt, ##arg)
+#define PMICLOGE(fmt, arg...)   pr_err(PMICTAG fmt, ##arg)
 //==============================================================================
 // Extern
 //==============================================================================
@@ -7250,12 +7251,12 @@ static int __init pmic_mt_init(void)
     // PMIC device driver register
     ret = platform_device_register(&pmic_mt_device);
     if (ret) {
-		PMICLOG("****[pmic_mt_init] Unable to device register(%d)\n", ret);
+        PMICLOGE("****[pmic_mt_init] Unable to device register(%d)\n", ret);
         return ret;
     }
     ret = platform_driver_register(&pmic_mt_driver);
     if (ret) {
-		PMICLOG("****[pmic_mt_init] Unable to register driver (%d)\n", ret);
+        PMICLOGE("****[pmic_mt_init] Unable to register driver (%d)\n", ret);
         return ret;
     }
 
@@ -7265,7 +7266,7 @@ static int __init pmic_mt_init(void)
 
     pmic_auxadc_init();
 
-	PMICLOG("****[pmic_mt_init] Initialization : DONE !!\n");
+    PMICLOGE("****[pmic_mt_init] Initialization : DONE !!\n");
 
     return 0;
 }

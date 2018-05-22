@@ -3255,85 +3255,85 @@ static int __init mt_gpufreq_init(void)
 	{
 
 		mt_entry = proc_create("gpufreq_debug", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_debug_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_limited_power", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_limited_power_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		#ifdef MT_GPUFREQ_OC_PROTECT
 		mt_entry = proc_create("gpufreq_limited_oc_ignore", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_limited_oc_ignore_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 		#endif
 
 		#ifdef MT_GPUFREQ_LOW_BATT_VOLUME_PROTECT
 		mt_entry = proc_create("gpufreq_limited_low_batt_volume_ignore", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_limited_low_batt_volume_ignore_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 		#endif
 
 		#ifdef MT_GPUFREQ_LOW_BATT_VOLT_PROTECT
 		mt_entry = proc_create("gpufreq_limited_low_batt_volt_ignore", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_limited_low_batt_volt_ignore_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 		#endif
 
 		mt_entry = proc_create("gpufreq_limited_thermal_ignore", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_limited_thermal_ignore_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_state", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_state_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_opp_dump", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_opp_dump_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_power_dump", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_power_dump_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_opp_freq", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_opp_freq_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_opp_max_freq", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_opp_max_freq_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_var_dump", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_var_dump_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_volt_enable", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_volt_enable_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_fixed_freq_volt", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_fixed_freq_volt_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 		mt_entry = proc_create("gpufreq_input_boost", S_IRUGO | S_IWUSR | S_IWGRP, mt_gpufreq_dir, &mt_gpufreq_input_boost_fops);
-		if (mt_entry)
+		/*if (mt_entry)
 		{
-		}
+		}*/
 
 	}
 #endif
