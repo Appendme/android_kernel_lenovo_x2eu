@@ -101,13 +101,23 @@ static int wiphy_suspend(struct device *dev, pm_message_t state)
 	rtnl_lock();
 	if (rdev->wiphy.registered) {
 		if (!rdev->wowlan)
-			cfg80211_leave_all(rdev);
+		///<<<lenovo-sw, fangzf1 workaround the wcn chip reset
+		//origin
+		//	cfg80211_leave_all(rdev);
+		//new
+			printk(KERN_ERR "wowlan is null 1\n");
+		///lenovo-sw, fangzf1 workaround the wcn chip reset>>>
 		if (rdev->ops->suspend)
 			ret = rdev_suspend(rdev, rdev->wowlan);
 		if (ret == 1) {
-			/* Driver refuse to configure wowlan */
-			cfg80211_leave_all(rdev);
-			ret = rdev_suspend(rdev, NULL);
+		///<<<lenovo-sw, fangzf1 workaround the wcn chip reset
+		//origin
+		//	/* Driver refuse to configure wowlan */
+		//	cfg80211_leave_all(rdev);
+		//	ret = rdev_suspend(rdev, NULL);
+		//new
+			printk(KERN_ERR "wowlan is null 2\n");
+		///lenovo-sw, fangzf1 workaround the wcn chip reset>>>
 		}
 	}
 	rtnl_unlock();
