@@ -5,7 +5,7 @@
  * Define constants.
  */
 
-#define PHYS_OFFSET 0x40000000
+#define CONFIG_PHYS_OFFSET 0x40000000
 
 /*
  * Define macros.
