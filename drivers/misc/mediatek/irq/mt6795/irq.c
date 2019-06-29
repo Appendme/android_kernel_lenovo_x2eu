@@ -459,7 +459,7 @@ static void mt_gic_cpu_init(void)
 	dsb();
 }
 
-void __cpuinit mt_gic_secondary_init(void)
+void mt_gic_secondary_init(void)
 {
 	mt_gic_cpu_init();
 }
@@ -1064,7 +1064,7 @@ restore_for_fiq(struct notifier_block *nfb, unsigned long action, void *hcpu)
 	return NOTIFY_OK;
 }
 
-static struct notifier_block __cpuinitdata fiq_notifier = {
+static struct notifier_block fiq_notifier = {
 	.notifier_call = restore_for_fiq,
 };
 

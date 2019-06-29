@@ -245,7 +245,7 @@ static int get_generic_timer_rate(void)
 	return 13000000;
 }
 
-static void __cpuinit generic_timer_calibrate_rate(void)
+static void generic_timer_calibrate_rate(void)
 {
 	/*
 	 * If this is the first time round, get timer rate, we don't use
@@ -300,7 +300,7 @@ static irqreturn_t timer_handler(int irq, void *dev_id)
 /*
  * Setup the local clock events for a CPU.
  */
-static int __cpuinit generic_timer_setup(struct clock_event_device *clk)
+static int generic_timer_setup(struct clock_event_device *clk)
 {
 	struct clock_event_device **this_cpu_clk;
 
@@ -326,7 +326,7 @@ static int __cpuinit generic_timer_setup(struct clock_event_device *clk)
 	return 0;
 }
 
-static struct local_timer_ops generic_timer_ops __cpuinitdata = {
+static struct local_timer_ops generic_timer_ops = {
 	.setup = generic_timer_setup,
 	.stop = generic_timer_stop,
 };

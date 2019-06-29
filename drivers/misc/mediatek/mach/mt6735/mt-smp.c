@@ -68,7 +68,7 @@ static DEFINE_SPINLOCK(boot_lock);
  * observers, irrespective of whether they're taking part in coherency
  * or not.  This is necessary for the hotplug code to work reliably.
  */
-static void __cpuinit write_pen_release(int val)
+static void write_pen_release(int val)
 {
     pen_release = val;
     smp_wmb();
@@ -104,7 +104,7 @@ static int _mt_smp_get_core_count(void)
 }
 #endif //#if !defined(CONFIG_OF)
 
-void __cpuinit mt_smp_secondary_init(unsigned int cpu)
+void mt_smp_secondary_init(unsigned int cpu)
 {
     struct wd_api *wd_api = NULL;
 
@@ -136,7 +136,7 @@ void __cpuinit mt_smp_secondary_init(unsigned int cpu)
     spin_unlock(&boot_lock);
 }
 
-int __cpuinit mt_smp_boot_secondary(unsigned int cpu, struct task_struct *idle)
+int mt_smp_boot_secondary(unsigned int cpu, struct task_struct *idle)
 {
     unsigned long timeout;
 

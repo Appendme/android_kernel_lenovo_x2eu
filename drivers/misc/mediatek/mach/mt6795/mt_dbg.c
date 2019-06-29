@@ -84,7 +84,7 @@ void restore_dbg_regs(unsigned int data[])
 
 
 #ifdef CONFIG_SMP
-int __cpuinit
+int
 dbgregs_hotplug_callback(struct notifier_block *nfb, unsigned long action, void *hcpu)
 {
 //		printk(KERN_ALERT "In hotplug callback\n");
@@ -236,7 +236,7 @@ dbgregs_hotplug_callback(struct notifier_block *nfb, unsigned long action, void 
 		return NOTIFY_OK;
 }
 
-static struct notifier_block __cpuinitdata cpu_nfb = {
+static struct notifier_block cpu_nfb = {
 		.notifier_call = dbgregs_hotplug_callback
 };
 
