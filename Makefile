@@ -381,7 +381,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -Werror=format -Werror=int-to-pointer-cast -Werror=pointer-to-int-cast \
+		   -Werror=int-to-pointer-cast -Werror=pointer-to-int-cast \
 		   -std=gnu89
 
 KBUILD_AFLAGS_KERNEL :=
